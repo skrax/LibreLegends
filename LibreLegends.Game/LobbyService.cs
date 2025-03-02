@@ -82,13 +82,11 @@ public class LobbyService(UserService userService, MatchService matchService)
         lobby.DecksByUserId[userId] = deck;
     }
 
-    public void CreateMatch(Guid lobbyId)
+    public Match CreateMatch(Guid lobbyId)
     {
         var lobby = Lobbies[lobbyId];
 
-
-        var match = matchService.Create(lobby.UserIds, lobby.DecksByUserId);
-        
+        return matchService.Create(lobby.UserIds, lobby.DecksByUserId);
     }
 
     public void Delete(Guid id)
