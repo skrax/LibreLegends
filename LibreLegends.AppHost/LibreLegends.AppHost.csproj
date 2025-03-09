@@ -12,12 +12,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\LibreLegends.ApiService\LibreLegends.ApiService.csproj"/>
-        <ProjectReference Include="..\LibreLegends.Web\LibreLegends.Web.csproj"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.1.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+      <ProjectReference Include="..\LibreLegends.Api\LibreLegends.Api.csproj" />
+      <ProjectReference Include="..\LibreLegends.Infrastructure\LibreLegends.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

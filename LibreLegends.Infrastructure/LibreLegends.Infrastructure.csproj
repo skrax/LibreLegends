@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.Hosting" Version="9.1.0" />
+      <PackageReference Include="Aspire.Npgsql" Version="9.1.0" />
+      <PackageReference Include="Dapper" Version="2.1.66" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Migrations\*.sql" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Jsonb\" />
+    </ItemGroup>
+
+</Project>

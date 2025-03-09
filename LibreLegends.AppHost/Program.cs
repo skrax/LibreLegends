@@ -1,15 +1,19 @@
+using Projects;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-var apiService = builder.AddProject<Projects.LibreLegends_ApiService>("apiservice");
+var postgres = builder
+    .AddPostgres("postgres")
+    .WithPgAdmin()
+    .WithDataVolume();
 
-var swaggerUi = builder
-    .AddContainer("swagger-ui", "docker.swagger.io/swaggerapi/swagger-ui", "latest")
-    .WithHttpEndpoint(targetPort: 8080)
-    .WithEnvironment("SWAGGER_JSON_URL", "https://localhost:7507/openapi/v1.json");
+var database = postgres.AddDatabase("libreLegendsDb", databaseName: "libre_legends");
 
-builder.AddProject<Projects.LibreLegends_Web>("webfrontend")
-    .WithExternalHttpEndpoints()
-    .WithReference(apiService)
-    .WaitFor(apiService);
+var databaseMigration = builder.AddProject<LibreLegends_Infrastructure>("libreLegendsDbMigration")
+    .WithReference(database);
+
+databaseMigration.WaitFor(database);
+
+var api = builder.AddProject<LibreLegends_Api>("libreLegendsApi").WithReference(database);
 
 builder.Build().Run();
