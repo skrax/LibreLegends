@@ -6,6 +6,10 @@ using NpgsqlTypes;
 
 namespace LibreLegends.Infrastructure.SqlTypeHandler;
 
+/// <summary>
+/// Instructs Dapper to treat the provided type as a jsonb column.
+/// Setting the value will trigger JSON serialization and vice versa.
+/// </summary>
 internal class JsonBTypeHandler<T>(JsonSerializerOptions? opt = null) : SqlMapper.TypeHandler<T>
 {
     public override void SetValue(IDbDataParameter parameter, T? value)

@@ -1,5 +1,8 @@
 ﻿namespace LibreLegends.Infrastructure.Schema;
 
+/// <summary>
+/// C# representation of the table 'cards'
+/// </summary>
 internal class CardTableRecord
 {
     public required Guid id { get; set; }

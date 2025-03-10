@@ -11,7 +11,7 @@ public static class CardsEndpoint
     {
         app.MapGet("/cards", async ([FromServices] ICardRepository cardRepository) =>
             {
-                var cards = await cardRepository.GetCards();
+                var cards = await cardRepository.GetAsync();
                 return Results.Ok(cards);
             })
             .WithOpenApi(operation =>
@@ -22,7 +22,7 @@ public static class CardsEndpoint
 
         app.MapGet("/cards/{id:guid}", async ([FromServices] ICardRepository cardRepository, Guid id) =>
             {
-                var card = await cardRepository.GetCardById(id);
+                var card = await cardRepository.GetAsync(id);
                 return card is not null ? Results.Ok(card) : Results.NotFound();
             })
             .WithOpenApi(operation =>
@@ -33,7 +33,7 @@ public static class CardsEndpoint
 
         app.MapGet("/cards/type/{cardType}", async ([FromServices] ICardRepository cardRepository, CardType cardType) =>
             {
-                var cards = await cardRepository.GetCardsByType(cardType);
+                var cards = await cardRepository.GetAsync(cardType);
                 return Results.Ok(cards);
             })
             .WithOpenApi(operation =>
@@ -45,7 +45,7 @@ public static class CardsEndpoint
         app.MapGet("/cards/creatures", async (
             [FromServices] ICardRepository cardRepository) =>
         {
-            var cards = await cardRepository.GetCardsByType(CardType.Creature);
+            var cards = await cardRepository.GetAsync(CardType.Creature);
 
             return Results.Ok(cards);
         });
@@ -61,7 +61,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = errorMessage });
                 }
 
-                var id = await cardRepository.CreateCard(creature);
+                var id = await cardRepository.AddAsync(creature);
                 return Results.Created($"/cards/{id}", creature);
             })
             .WithOpenApi(operation =>
@@ -73,7 +73,7 @@ public static class CardsEndpoint
         app.MapGet("/cards/spells", async (
             [FromServices] ICardRepository cardRepository) =>
         {
-            var cards = await cardRepository.GetCardsByType(CardType.Spell);
+            var cards = await cardRepository.GetAsync(CardType.Spell);
 
             return Results.Ok(cards);
         });
@@ -89,7 +89,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = errorMessage });
                 }
 
-                var id = await cardRepository.CreateCard(spell);
+                var id = await cardRepository.AddAsync(spell);
                 return Results.Created($"/cards/{id}", spell);
             })
             .WithOpenApi(operation =>
@@ -109,7 +109,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = "ID mismatch between URL and body" });
                 }
 
-                var existingCard = await cardRepository.GetCardById(id);
+                var existingCard = await cardRepository.GetAsync(id);
                 if (existingCard is null)
                 {
                     return Results.NotFound();
@@ -126,7 +126,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = errorMessage });
                 }
 
-                var success = await cardRepository.UpdateCard(creature);
+                var success = await cardRepository.UpdateAsync(creature);
                 return success ? Results.NoContent() : Results.NotFound();
             })
             .WithOpenApi(operation =>
@@ -146,7 +146,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = "ID mismatch between URL and body" });
                 }
 
-                var existingCard = await cardRepository.GetCardById(id);
+                var existingCard = await cardRepository.GetAsync(id);
                 if (existingCard is null)
                 {
                     return Results.NotFound();
@@ -163,7 +163,7 @@ public static class CardsEndpoint
                     return Results.BadRequest(new { Error = errorMessage });
                 }
 
-                var success = await cardRepository.UpdateCard(spell);
+                var success = await cardRepository.UpdateAsync(spell);
                 return success ? Results.NoContent() : Results.NotFound();
             })
             .WithOpenApi(operation =>
@@ -174,7 +174,7 @@ public static class CardsEndpoint
 
         app.MapDelete("/cards/{id:guid}", async ([FromServices] ICardRepository cardRepository, Guid id) =>
             {
-                var success = await cardRepository.DeleteCard(id);
+                var success = await cardRepository.DeleteAsync(id);
                 return success ? Results.NoContent() : Results.NotFound();
             })
             .WithOpenApi(operation =>
@@ -185,7 +185,7 @@ public static class CardsEndpoint
 
         app.MapDelete("/cards", async ([FromServices] ICardRepository cardRepository) =>
             {
-                await cardRepository.Delete();
+                await cardRepository.DeleteAsync();
 
                 return Results.NoContent();
             })

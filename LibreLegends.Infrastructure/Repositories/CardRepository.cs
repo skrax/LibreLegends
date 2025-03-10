@@ -10,7 +10,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
 {
     private readonly JsonSerializerOptions _jsonOptions = new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
-    public async Task<IReadOnlyList<Card>> GetCards()
+    public async Task<IReadOnlyList<Card>> GetAsync()
     {
         await connection.OpenAsync();
 
@@ -21,7 +21,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return records.Select(MapToCard).ToArray();
     }
 
-    public async Task<Card?> GetCardById(Guid id)
+    public async Task<Card?> GetAsync(Guid id)
     {
         await connection.OpenAsync();
 
@@ -33,7 +33,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return record != null ? MapToCard(record) : null;
     }
 
-    public async Task<IReadOnlyList<Card>> GetCardsByType(CardType cardType)
+    public async Task<IReadOnlyList<Card>> GetAsync(CardType cardType)
     {
         await connection.OpenAsync();
 
@@ -45,7 +45,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return records.Select(MapToCard).ToArray();
     }
 
-    public async Task<Guid> CreateCard(Card card)
+    public async Task<Guid> AddAsync(Card card)
     {
         await connection.OpenAsync();
 
@@ -91,7 +91,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return id;
     }
 
-    public async Task<bool> UpdateCard(Card card)
+    public async Task<bool> UpdateAsync(Card card)
     {
         await connection.OpenAsync();
 
@@ -147,7 +147,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return rowsAffected > 0;
     }
 
-    public async Task<bool> DeleteCard(Guid id)
+    public async Task<bool> DeleteAsync(Guid id)
     {
         await connection.OpenAsync();
 
@@ -159,7 +159,7 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return rowsAffected > 0;
     }
 
-    public async Task Delete()
+    public async Task DeleteAsync()
     {
         await connection.OpenAsync();
         
