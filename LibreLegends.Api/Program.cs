@@ -69,12 +69,6 @@ try
         [FromServices] ICardValidationService validationService,
         [FromBody] Spell spell) =>
         {
-            // Ensure we have a valid GUID
-            if (spell.Id == Guid.Empty)
-            {
-                spell.Id = Guid.NewGuid();
-            }
-
             var (isValid, errorMessage) = validationService.ValidateCard(spell);
             if (!isValid)
             {

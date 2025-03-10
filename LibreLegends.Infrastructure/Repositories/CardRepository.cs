@@ -85,6 +85,8 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         };
 
         await connection.CloseAsync();
+        
+        card.Id = id;
 
         return id;
     }
