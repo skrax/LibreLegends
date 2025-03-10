@@ -19740,8 +19740,134 @@
 
   // src/index.tsx
   var import_client = __toESM(require_client());
+
+  // src/clients/apiClientBase.ts
+  var ApiClientBase = class {
+    constructor(baseUrl) {
+      this.baseUrl = baseUrl;
+    }
+    async get(url) {
+      const response = await fetch(`${this.baseUrl}${url}`, {
+        method: "GET"
+      });
+      if (!response.ok) {
+        throw {
+          response,
+          message: response.statusText
+        };
+      }
+      return await response.json();
+    }
+    async post(url, data) {
+      const response = await fetch(`${this.baseUrl}${url}`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (!response.ok) {
+        throw {
+          response,
+          message: response.statusText
+        };
+      }
+      return await response.json();
+    }
+    async put(url, data) {
+      const response = await fetch(`${this.baseUrl}${url}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (!response.ok) {
+        throw {
+          response,
+          message: response.statusText
+        };
+      }
+      return await response.json();
+    }
+    async patch(url, data) {
+      const response = await fetch(`${this.baseUrl}${url}`, {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (!response.ok) {
+        throw {
+          response,
+          message: response.statusText
+        };
+      }
+      return await response.json();
+    }
+    async delete(url) {
+      const response = await fetch(`${this.baseUrl}${url}`, {
+        method: "DELETE"
+      });
+      if (!response.ok) {
+        throw {
+          response,
+          message: response.statusText
+        };
+      }
+    }
+  };
+
+  // src/clients/cardsApi.ts
+  var CardsApi = class extends ApiClientBase {
+    constructor(baseUrl) {
+      super(baseUrl);
+    }
+    getCards() {
+      return this.get("/cards");
+    }
+    getCard(id) {
+      return this.get(`/cards/${id}`);
+    }
+    getCreatures() {
+      return this.get("/cards/creatures");
+    }
+    postCreature(creature) {
+      return this.post("/cards/creatures", creature);
+    }
+    putCreature() {
+      return this.put("/cards/creatures", {});
+    }
+    getSpells() {
+      return this.get("/cards/spells");
+    }
+    postSpell() {
+      return this.post("/cards/spells", {});
+    }
+    putSpell() {
+      return this.put("/cards/spells", {});
+    }
+    deleteCards() {
+      return this.delete("/cards");
+    }
+    deleteCard(id) {
+      return this.delete(`/cards/${id}`);
+    }
+  };
+
+  // src/index.tsx
   var import_jsx_runtime = __toESM(require_jsx_runtime());
   function App() {
+    const cardsApi = new CardsApi("https://localhost:7079");
+    cardsApi.getCards().then((cards) => console.log(cards));
+    cardsApi.postCreature({
+      cost: 1,
+      health: 2,
+      name: "Knight",
+      strength: 1,
+      description: "A noble warrior"
+    }).then((x) => console.log(x)).catch((err) => console.log(err));
     return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { children: "Hello from React!" });
   }
   var root = import_client.default.createRoot(document.getElementById("root"));

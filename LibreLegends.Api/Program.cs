@@ -7,6 +7,7 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors();
+    builder.Services.AddOpenApi();
     builder.AddServiceDefaults();
     builder.AddLibreLegendsInfrastructure();
 

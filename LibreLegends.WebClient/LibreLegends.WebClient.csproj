@@ -14,6 +14,10 @@
       <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="libre-legends-web\docs\openapi.json" />
+    </ItemGroup>
+
     <Target Name="NpmBuild" BeforeTargets="Build">
         <Exec Command="npm install" WorkingDirectory="libre-legends-web"/>
         <Exec Command="npm run bundle" WorkingDirectory="libre-legends-web"/>
