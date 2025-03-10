@@ -14,11 +14,19 @@ try
 
     var app = builder.Build();
 
-    app.UseCors(x => { x.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod(); });
+    app.UseCors(x =>
+    {
+        if (app.Environment.IsDevelopment())
+        {
+            x.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        }
+    });
 
     app.MapOpenApi();
     app.UseHttpsRedirection();
-    
+
     app.MapCardsEndpoint();
 
     app.Run();
