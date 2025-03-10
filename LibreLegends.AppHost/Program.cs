@@ -16,4 +16,8 @@ databaseMigration.WaitFor(database);
 
 var api = builder.AddProject<LibreLegends_Api>("libreLegendsApi").WithReference(database);
 
+var frontend = builder.AddProject<LibreLegends_WebClient>("libreLegendsWebClient");
+
+frontend.WaitFor(api);
+
 builder.Build().Run();

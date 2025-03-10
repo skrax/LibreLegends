@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <Target Name="NpmBuild" BeforeTargets="Build">
+        <Exec Command="npm install" WorkingDirectory="libre-legends-web"/>
+        <Exec Command="npm run bundle" WorkingDirectory="libre-legends-web"/>
+    </Target>
+
+</Project>
