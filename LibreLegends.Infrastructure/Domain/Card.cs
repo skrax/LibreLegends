@@ -6,7 +6,7 @@ namespace LibreLegends.Infrastructure.Domain;
 [JsonDerivedType(typeof(Spell))]
 public abstract class Card
 {
-    public required Guid Id { get; set; }
+    public Guid Id { get; set; }
 
     public required string Name { get; set; }
 }

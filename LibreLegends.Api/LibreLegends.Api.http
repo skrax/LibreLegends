@@ -1,6 +1,6 @@
-@LibreLegends.Api_HostAddress = http://localhost:5150
+@Host = https://localhost:7079
 
-GET {{LibreLegends.Api_HostAddress}}/weatherforecast/
+GET {{Host}}/cards/
 Accept: application/json
 
 ###

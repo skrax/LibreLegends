@@ -17,6 +17,6 @@ public class Spell : Card
         Name = x.name,
         Description = x.description!,
         Cost = x.cost!.Value,
-        Abilities = JsonSerializer.Deserialize<SpellAbilities>(x.abilities, serializerOptions)
+        Abilities = JsonSerializer.Deserialize<SpellAbilities>(x.abilities!, serializerOptions)
     };
 }

@@ -2,9 +2,6 @@
 
 namespace LibreLegends.Infrastructure.Domain;
 
-[JsonDerivedType(typeof(CreatureAbilities))]
-[JsonDerivedType(typeof(SpellAbilities))]
-public abstract class Abilities
-{
-    public int version { get; }
-}
+[JsonDerivedType(typeof(CreatureAbilities), "creatureAbilities")]
+[JsonDerivedType(typeof(SpellAbilities), "spellAbilities")]
+public abstract class Abilities;

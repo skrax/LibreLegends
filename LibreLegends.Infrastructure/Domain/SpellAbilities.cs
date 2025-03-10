@@ -2,5 +2,5 @@
 
 public class SpellAbilities : Abilities
 {
-    public List<Effect> on_play { get; set; } = [];
+    public List<Effect> OnPlay { get; set; } = [];
 }
