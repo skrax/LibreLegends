@@ -21,8 +21,4 @@
         <None Include="Migrations\*.sql" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Jsonb\" />
-    </ItemGroup>
-
 </Project>
