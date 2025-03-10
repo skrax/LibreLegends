@@ -1,6 +1,0 @@
-@Host = https://localhost:7079
-
-GET {{Host}}/cards/
-Accept: application/json
-
-###

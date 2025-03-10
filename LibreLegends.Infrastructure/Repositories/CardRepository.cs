@@ -33,12 +33,12 @@ internal class CardRepository(NpgsqlConnection connection) : ICardRepository
         return record != null ? MapToCard(record) : null;
     }
 
-    public async Task<IReadOnlyList<Card>> GetCardsByType(int cardTypeId)
+    public async Task<IReadOnlyList<Card>> GetCardsByType(CardType cardType)
     {
         await connection.OpenAsync();
 
         var records = await connection.QueryAsync<CardTableRecord>(
-            "SELECT * FROM cards WHERE card_type_id = @CardTypeId", new { CardTypeId = cardTypeId });
+            "SELECT * FROM cards WHERE card_type_id = @CardTypeId", new { CardTypeId = cardType });
 
         await connection.CloseAsync();
 
