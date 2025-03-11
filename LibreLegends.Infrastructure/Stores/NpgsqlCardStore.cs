@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using LibreLegends.Domain;
+using LibreLegends.Domain.Models;
 using LibreLegends.Infrastructure.Mapper;
 using LibreLegends.Infrastructure.Schema;
 using Npgsql;

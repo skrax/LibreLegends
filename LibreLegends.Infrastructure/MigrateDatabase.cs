@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Dapper;
+﻿using Dapper;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;

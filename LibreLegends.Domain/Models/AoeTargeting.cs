@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.Domain;
+﻿namespace LibreLegends.Domain.Models;
 
 public class AoeTargeting : Targeting
 {

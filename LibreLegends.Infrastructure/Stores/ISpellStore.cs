@@ -1,4 +1,4 @@
-﻿using LibreLegends.Domain;
+﻿using LibreLegends.Domain.Models;
 
 namespace LibreLegends.Infrastructure.Stores;
 

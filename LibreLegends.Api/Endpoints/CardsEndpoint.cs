@@ -1,6 +1,7 @@
-﻿using LibreLegends.Api.Services;
-using LibreLegends.Domain;
-using LibreLegends.Infrastructure.Stores;
+﻿using LibreLegends.Api.Mapper;
+using LibreLegends.Api.Models.Request;
+using LibreLegends.CardManagement.Application.Services;
+using LibreLegends.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibreLegends.Api.Endpoints;
@@ -9,10 +10,13 @@ public static class CardsEndpoint
 {
     public static IEndpointRouteBuilder MapCardsEndpoint(this IEndpointRouteBuilder app)
     {
-        app.MapGet("/cards", async ([FromServices] ICardStore cardStore) =>
+        app.MapGet("/cards", async ([FromServices] ICardManagementService cardManagementService) =>
             {
-                var cards = await cardStore.GetAsync();
-                return Results.Ok(cards);
+                var cards = await cardManagementService.GetCardsAsync();
+
+                var response = cards.Select(x => x.AsCardTo());
+
+                return Results.Ok(response);
             })
             .WithOpenApi(operation =>
             {
@@ -20,10 +24,13 @@ public static class CardsEndpoint
                 return operation;
             });
 
-        app.MapGet("/cards/{id:guid}", async ([FromServices] ICardStore cardStore, Guid id) =>
+        app.MapGet("/cards/{id:guid}", async ([FromServices] ICardManagementService cardManagementService, Guid id) =>
             {
-                var card = await cardStore.GetAsync(id);
-                return card is not null ? Results.Ok(card) : Results.NotFound();
+                var card = await cardManagementService.GetCardByIdAsync(id);
+
+                var response = card?.AsCardTo();
+
+                return response is not null ? Results.Ok(response) : Results.NotFound();
             })
             .WithOpenApi(operation =>
             {
@@ -31,11 +38,15 @@ public static class CardsEndpoint
                 return operation;
             });
 
-        app.MapGet("/cards/type/{cardType}", async ([FromServices] ICardStore cardStore, CardType cardType) =>
-            {
-                var cards = await cardStore.GetAsync(cardType);
-                return Results.Ok(cards);
-            })
+        app.MapGet("/cards/type/{cardType}",
+                async ([FromServices] ICardManagementService cardManagementService, CardType cardType) =>
+                {
+                    var cards = await cardManagementService.GetCardsByTypeAsync(cardType);
+
+                    var response = cards.Select(x => x.AsCardTo());
+
+                    return Results.Ok(response);
+                })
             .WithOpenApi(operation =>
             {
                 operation.Summary = "Gets cards by type";
@@ -43,26 +54,24 @@ public static class CardsEndpoint
             });
 
         app.MapGet("/cards/creatures", async (
-            [FromServices] ICardStore cardStore) =>
+            [FromServices] ICardManagementService cardManagementService) =>
         {
-            var cards = await cardStore.GetAsync(CardType.Creature);
+            var cards = await cardManagementService.GetCardsByTypeAsync(CardType.Creature);
 
-            return Results.Ok(cards);
+            var response = cards.Select(x => x.AsCardTo());
+
+            return Results.Ok(response);
         });
 
         app.MapPost("/cards/creatures", async (
-                [FromServices] ICardStore cardStore,
-                [FromServices] ICardValidationService validationService,
-                [FromBody] Creature creature) =>
+                [FromServices] ICardManagementService cardManagementService,
+                [FromBody] CreateOrUpdateCreatureDto request) =>
             {
-                var (isValid, errorMessage) = validationService.ValidateCard(creature);
-                if (!isValid)
-                {
-                    return Results.BadRequest(new { Error = errorMessage });
-                }
+                var creature = await cardManagementService.CreateCreatureAsync(request.AsCreateCreatureRequest());
 
-                var id = await cardStore.AddAsync(creature);
-                return Results.Created($"/cards/{id}", creature);
+                var response = creature.AsCreatureDto();
+
+                return Results.Created($"/cards/{response.Id}", response);
             })
             .WithOpenApi(operation =>
             {
@@ -71,26 +80,24 @@ public static class CardsEndpoint
             });
 
         app.MapGet("/cards/spells", async (
-            [FromServices] ICardStore cardStore) =>
+            [FromServices] ICardManagementService cardManagementService) =>
         {
-            var cards = await cardStore.GetAsync(CardType.Spell);
+            var cards = await cardManagementService.GetCardsByTypeAsync(CardType.Spell);
 
-            return Results.Ok(cards);
+            var response = cards.Select(x => x.AsCardTo());
+
+            return Results.Ok(response);
         });
 
         app.MapPost("/cards/spells", async (
-                [FromServices] ICardStore cardStore,
-                [FromServices] ICardValidationService validationService,
-                [FromBody] Spell spell) =>
+                [FromServices] ICardManagementService cardManagementService,
+                [FromBody] CreateOrUpdateSpellDto request) =>
             {
-                var (isValid, errorMessage) = validationService.ValidateCard(spell);
-                if (!isValid)
-                {
-                    return Results.BadRequest(new { Error = errorMessage });
-                }
+                var spell = await cardManagementService.CreateSpellAsync(request.AsCreateSpellRequest());
 
-                var id = await cardStore.AddAsync(spell);
-                return Results.Created($"/cards/{id}", spell);
+                var response = spell.AsSpellDto();
+
+                return Results.Created($"/cards/{response.Id}", response);
             })
             .WithOpenApi(operation =>
             {
@@ -99,35 +106,17 @@ public static class CardsEndpoint
             });
 
         app.MapPut("/cards/creatures/{id:guid}", async (
-                [FromServices] ICardStore cardStore,
-                [FromServices] ICardValidationService validationService,
+                [FromServices] ICardManagementService cardManagementService,
                 Guid id,
-                [FromBody] Creature creature) =>
+                [FromBody] CreateOrUpdateCreatureDto request) =>
             {
-                if (id != creature.Id)
-                {
-                    return Results.BadRequest(new { Error = "ID mismatch between URL and body" });
-                }
+                var creature = await cardManagementService.UpdateCreatureAsync(request.AsUpdateCreatureRequest(id));
 
-                var existingCard = await cardStore.GetAsync(id);
-                if (existingCard is null)
-                {
-                    return Results.NotFound();
-                }
+                var response = creature?.AsCreatureDto();
 
-                if (existingCard is not Creature)
-                {
-                    return Results.BadRequest(new { Error = "Cannot update non-creature card as a creature" });
-                }
-
-                var (isValid, errorMessage) = validationService.ValidateCard(creature);
-                if (!isValid)
-                {
-                    return Results.BadRequest(new { Error = errorMessage });
-                }
-
-                var success = await cardStore.UpdateAsync(creature);
-                return success ? Results.NoContent() : Results.NotFound();
+                return response is not null
+                    ? Results.NoContent()
+                    : Results.NotFound();
             })
             .WithOpenApi(operation =>
             {
@@ -136,35 +125,17 @@ public static class CardsEndpoint
             });
 
         app.MapPut("/cards/spells/{id:guid}", async (
-                [FromServices] ICardStore cardStore,
-                [FromServices] ICardValidationService validationService,
+                [FromServices] ICardManagementService cardManagementService,
                 Guid id,
-                [FromBody] Spell spell) =>
+                [FromBody] CreateOrUpdateSpellDto request) =>
             {
-                if (id != spell.Id)
-                {
-                    return Results.BadRequest(new { Error = "ID mismatch between URL and body" });
-                }
+                var spell = await cardManagementService.UpdateSpellAsync(request.AsUpdateSpellRequest(id));
 
-                var existingCard = await cardStore.GetAsync(id);
-                if (existingCard is null)
-                {
-                    return Results.NotFound();
-                }
+                var response = spell?.AsSpellDto();
 
-                if (existingCard is not Spell)
-                {
-                    return Results.BadRequest(new { Error = "Cannot update non-spell card as a spell" });
-                }
-
-                var (isValid, errorMessage) = validationService.ValidateCard(spell);
-                if (!isValid)
-                {
-                    return Results.BadRequest(new { Error = errorMessage });
-                }
-
-                var success = await cardStore.UpdateAsync(spell);
-                return success ? Results.NoContent() : Results.NotFound();
+                return response is not null
+                    ? Results.NoContent()
+                    : Results.NotFound();
             })
             .WithOpenApi(operation =>
             {
@@ -172,20 +143,22 @@ public static class CardsEndpoint
                 return operation;
             });
 
-        app.MapDelete("/cards/{id:guid}", async ([FromServices] ICardStore cardStore, Guid id) =>
-            {
-                var success = await cardStore.DeleteAsync(id);
-                return success ? Results.NoContent() : Results.NotFound();
-            })
+        app.MapDelete("/cards/{id:guid}",
+                async ([FromServices] ICardManagementService cardManagementService, Guid id) =>
+                {
+                    await cardManagementService.DeleteByIdAsync(id);
+
+                    return Results.NoContent();
+                })
             .WithOpenApi(operation =>
             {
                 operation.Summary = "Deletes a card";
                 return operation;
             });
 
-        app.MapDelete("/cards", async ([FromServices] ICardStore cardStore) =>
+        app.MapDelete("/cards", async ([FromServices] ICardManagementService cardManagementService) =>
             {
-                await cardStore.DeleteAsync();
+                await cardManagementService.DeleteAllCardsAsync();
 
                 return Results.NoContent();
             })

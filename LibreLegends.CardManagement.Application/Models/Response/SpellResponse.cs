@@ -1,0 +1,10 @@
+﻿namespace LibreLegends.CardManagement.Application.Models.Response;
+
+public class SpellResponse : CardResponse
+{
+    public required string Description { get; set; }
+
+    public required int Cost { get; set; }
+
+    public required string AbilitiesJson { get; set; }
+}

@@ -1,4 +1,5 @@
 ﻿using LibreLegends.Infrastructure;
+using LibreLegends.ServiceDefaults;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

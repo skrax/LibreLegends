@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using LibreLegends.Domain;
+using LibreLegends.Domain.Models;
 using LibreLegends.Infrastructure.SqlTypeHandler;
 using LibreLegends.Infrastructure.Stores;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +9,7 @@ namespace LibreLegends.Infrastructure.DependencyInjection;
 
 public static class DependencyInjectionExtensions
 {
-    public static IHostApplicationBuilder AddLibreLegendsInfrastructure(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructureNpgsql(this IHostApplicationBuilder builder)
     {
         builder.AddNpgsqlDataSource("libreLegendsDb");
 

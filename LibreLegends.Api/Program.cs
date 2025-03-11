@@ -1,6 +1,7 @@
 using LibreLegends.Api.Endpoints;
-using LibreLegends.Api.Services;
+using LibreLegends.CardManagement.Application.DependencyInjection;
 using LibreLegends.Infrastructure.DependencyInjection;
+using LibreLegends.ServiceDefaults;
 
 try
 {
@@ -9,9 +10,9 @@ try
     builder.Services.AddCors();
     builder.Services.AddOpenApi();
     builder.AddServiceDefaults();
-    builder.AddLibreLegendsInfrastructure();
 
-    builder.Services.AddScoped<ICardValidationService, CardValidationService>();
+    builder.AddInfrastructureNpgsql();
+    builder.AddCardManagement();
 
     var app = builder.Build();
 

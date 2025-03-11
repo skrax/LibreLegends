@@ -11,8 +11,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LibreLegends.Infrastructure\LibreLegends.Infrastructure.csproj" />
+      <ProjectReference Include="..\LibreLegends.CardManagement.Application\LibreLegends.CardManagement.Application.csproj" />
       <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

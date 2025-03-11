@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using LibreLegends.Domain;
+using LibreLegends.Domain.Models;
 using LibreLegends.Infrastructure.Schema;
 
 namespace LibreLegends.Infrastructure.Mapper;
