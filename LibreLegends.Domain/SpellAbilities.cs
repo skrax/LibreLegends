@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.Infrastructure.Domain;
+﻿namespace LibreLegends.Domain;
 
 public class SpellAbilities : Abilities
 {

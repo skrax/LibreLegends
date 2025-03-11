@@ -14,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LibreLegends.Domain\LibreLegends.Domain.csproj" />
       <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
     </ItemGroup>
 

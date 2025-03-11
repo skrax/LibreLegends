@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using LibreLegends.Infrastructure.Domain;
-using LibreLegends.Infrastructure.Repositories;
+using LibreLegends.Domain;
 using LibreLegends.Infrastructure.SqlTypeHandler;
+using LibreLegends.Infrastructure.Stores;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,7 +13,10 @@ public static class DependencyInjectionExtensions
     {
         builder.AddNpgsqlDataSource("libreLegendsDb");
 
-        builder.Services.AddScoped<ICardRepository, CardRepository>();
+        builder.Services
+            .AddScoped<ICreatureStore, NpgsqlCreatureStore>()
+            .AddScoped<ISpellStore, NpgsqlSpellStore>()
+            .AddScoped<ICardStore, NpgsqlCardStore>();
 
         SqlMapper.AddTypeHandler(new JsonBTypeHandler<CreatureAbilities>());
         SqlMapper.AddTypeHandler(new JsonBTypeHandler<SpellAbilities>());

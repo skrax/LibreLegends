@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Api", "LibreLe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.WebClient", "LibreLegends.WebClient\LibreLegends.WebClient.csproj", "{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Domain", "LibreLegends.Domain\LibreLegends.Domain.csproj", "{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

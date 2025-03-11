@@ -1,4 +1,4 @@
-﻿using LibreLegends.Infrastructure.Domain;
+﻿using LibreLegends.Domain;
 
 namespace LibreLegends.Api.Services;
 

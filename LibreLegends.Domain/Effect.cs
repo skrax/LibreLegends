@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace LibreLegends.Infrastructure.Domain;
+namespace LibreLegends.Domain;
 
 [JsonDerivedType(typeof(DealDamageEffect), "dealDamageEffect")]
 public abstract class Effect;
