@@ -4,6 +4,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder
     .AddPostgres("postgres")
+    .WithEnvironment("POSTGRES_DB", "libre_legends")
     .WithPgAdmin()
     .WithDataVolume();
 
@@ -16,7 +17,7 @@ databaseMigration.WaitFor(database);
 
 var api = builder.AddProject<LibreLegends_Api>("libreLegendsApi").WithReference(database);
 
-var frontend = builder.AddProject<LibreLegends_WebClient>("libreLegendsWebClient");
+var frontend = builder.AddProject<LibreLegends_Web>("libreLegendsWebClient");
 
 frontend.WaitFor(api);
 

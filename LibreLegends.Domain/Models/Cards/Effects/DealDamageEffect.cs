@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.Domain.Models;
+﻿namespace LibreLegends.Domain.Models.Cards.Effects;
 
 public class DealDamageEffect : Effect
 {

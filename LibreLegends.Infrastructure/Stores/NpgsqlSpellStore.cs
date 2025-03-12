@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using Npgsql;
 
 namespace LibreLegends.Infrastructure.Stores;
@@ -11,8 +12,8 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
         await db.OpenAsync(cancellationToken);
 
         const string sql = """
-                           INSERT INTO cards (name, description, card_type_id, cost, abilities)
-                           VALUES (@Name, @Description, 2, @Cost, @Abilities)
+                           INSERT INTO cards (name, description, card_type_id, cost, behavior)
+                           VALUES (@Name, @Description, 2, @Cost, @Behavior)
                            RETURNING id
                            """;
 
@@ -21,7 +22,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
             spell.Name,
             spell.Description,
             spell.Cost,
-            spell.Abilities
+            spell.Behavior
         };
 
         var id = await db.ExecuteScalarAsync<Guid>(sql, parameters);
@@ -42,7 +43,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
                                name = @Name,
                                description = @Description,
                                cost = @Cost,
-                               abilities = @Abilities
+                               behavior = @Behavior
                            WHERE id = @Id AND card_type_id = 2
                            """;
 
@@ -51,7 +52,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
             spell.Name,
             spell.Description,
             spell.Cost,
-            spell.Abilities,
+            spell.Behavior,
             spell.Id
         };
 

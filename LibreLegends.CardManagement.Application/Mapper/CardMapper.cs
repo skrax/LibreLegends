@@ -1,6 +1,6 @@
 ﻿using LibreLegends.CardManagement.Application.Models.Request;
 using LibreLegends.CardManagement.Application.Models.Response;
-using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 
 namespace LibreLegends.CardManagement.Application.Mapper;
 
@@ -24,7 +24,7 @@ public static class CardMapper
         Cost = card.Cost,
         Strength = card.Strength,
         Health = card.Health,
-        AbilitiesJson = card.GetAbilitiesAsJson(),
+        BehaviorJson = card.Behavior?.ToJson()
     };
 
     public static SpellResponse AsSpellResponse(this Spell spell) => new()
@@ -33,7 +33,7 @@ public static class CardMapper
         Name = spell.Name,
         Description = spell.Description,
         Cost = spell.Cost,
-        AbilitiesJson = spell.GetAbilitiesAsJson(),
+        BehaviorJson = spell.Behavior.ToJson()
     };
 
     public static Creature AsCreature(this CreateCreatureRequest request)
@@ -44,13 +44,9 @@ public static class CardMapper
             Description = request.Description,
             Cost = request.Cost,
             Strength = request.Strength,
-            Health = request.Health
+            Health = request.Health,
+            Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
         };
-
-        if (request.AbilitiesJson is not null)
-        {
-            creature.SetAbilitiesAsJson(request.AbilitiesJson);
-        }
 
         return creature;
     }
@@ -64,13 +60,9 @@ public static class CardMapper
             Description = request.Description,
             Cost = request.Cost,
             Strength = request.Strength,
-            Health = request.Health
+            Health = request.Health,
+            Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
         };
-
-        if (request.AbilitiesJson is not null)
-        {
-            creature.SetAbilitiesAsJson(request.AbilitiesJson);
-        }
 
         return creature;
     }
@@ -80,7 +72,7 @@ public static class CardMapper
         Name = request.Name,
         Description = request.Description,
         Cost = request.Cost,
-        Abilities = Spell.GetAbilitiesFromJson(request.AbilitiesJson)
+        Behavior = CardBehavior.FromJson(request.BehaviorJson)
     };
 
     public static Spell AsSpell(this UpdateSpellRequest request) => new()
@@ -88,6 +80,6 @@ public static class CardMapper
         Name = request.Name,
         Description = request.Description,
         Cost = request.Cost,
-        Abilities = Spell.GetAbilitiesFromJson(request.AbilitiesJson)
+        Behavior = CardBehavior.FromJson(request.BehaviorJson)
     };
 }

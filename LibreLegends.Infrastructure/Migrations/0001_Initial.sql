@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS public.cards
     cost integer,
     strength integer,
     health integer,
-    abilities jsonb,
+    behavior jsonb,
     created_at timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (card_type_id)
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public.cards
         ON DELETE NO ACTION
         NOT VALID,
     CONSTRAINT creature CHECK (card_type_id != 1 OR (cost IS NOT NULL AND strength IS NOT NULL AND health IS NOT NULL)) NOT VALID,
-    CONSTRAINT spell CHECK (card_type_id != 2 OR (cost IS NOT NULL AND abilities IS NOT NULL)) NOT VALID
+    CONSTRAINT spell CHECK (card_type_id != 2 OR (cost IS NOT NULL AND behavior IS NOT NULL AND strength IS NULL AND health IS NULL)) NOT VALID
 );
 
 INSERT INTO public.card_types(id, name, description)

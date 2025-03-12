@@ -1,4 +1,5 @@
 ﻿using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 
 namespace LibreLegends.Infrastructure.Stores;
 

@@ -19,5 +19,5 @@ internal class CardTableRecord
     
     public int? strength { get; set; }
     
-    public string? abilities { get; set; }
+    public string? behavior { get; set; }
 }

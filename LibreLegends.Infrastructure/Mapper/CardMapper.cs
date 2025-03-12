@@ -1,12 +1,13 @@
 ﻿using System.Text.Json;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.Schema;
 
 namespace LibreLegends.Infrastructure.Mapper;
 
 internal static class CardMapper
 {
-    internal static Creature AsCreature(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) =>
+    public static Creature AsCreature(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) =>
         new()
         {
             Id = x.id,
@@ -15,21 +16,21 @@ internal static class CardMapper
             Cost = x.cost!.Value,
             Strength = x.strength!.Value,
             Health = x.health!.Value,
-            Abilities = x.abilities is null
+            Behavior = x.behavior is null
                 ? null
-                : JsonSerializer.Deserialize<CreatureAbilities>(x.abilities!, serializerOptions)
+                : CardBehavior.FromJson(x.behavior!, serializerOptions)
         };
 
-    internal static Spell AsSpell(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) => new()
+    public static Spell AsSpell(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) => new()
     {
         Id = x.id,
         Name = x.name,
         Description = x.description!,
         Cost = x.cost!.Value,
-        Abilities = JsonSerializer.Deserialize<SpellAbilities>(x.abilities!, serializerOptions)
+        Behavior = CardBehavior.FromJson(x.behavior!, serializerOptions)
     };
 
-    internal static Card AsCard(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) =>
+    public static Card AsCard(this CardTableRecord x, JsonSerializerOptions? serializerOptions = null) =>
         (CardType)x.card_type_id switch
         {
             CardType.Creature => x.AsCreature(),

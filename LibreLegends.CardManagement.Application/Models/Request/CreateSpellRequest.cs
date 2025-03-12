@@ -8,5 +8,5 @@ public class CreateSpellRequest
     
     public required int Cost { get; set; }
     
-    public required string AbilitiesJson { get; set; }
+    public required string BehaviorJson { get; set; }
 }

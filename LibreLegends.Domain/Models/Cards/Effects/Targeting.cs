@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace LibreLegends.Domain.Models;
+namespace LibreLegends.Domain.Models.Cards.Effects;
 
 [JsonDerivedType(typeof(SingleTargeting), "single")]
 [JsonDerivedType(typeof(MultiTargeting), "multi")]

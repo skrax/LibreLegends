@@ -14,5 +14,5 @@ public class UpdateCreatureRequest
 
     public required int Health { get; set; }
     
-    public string? AbilitiesJson { get; set; }
+    public string? BehaviorJson { get; set; }
 }

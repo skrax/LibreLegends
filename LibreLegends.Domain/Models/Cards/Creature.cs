@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using LibreLegends.Domain.Exceptions;
 
-namespace LibreLegends.Domain.Models;
+namespace LibreLegends.Domain.Models.Cards;
 
 public class Creature : Card
 {
@@ -57,35 +57,5 @@ public class Creature : Card
         }
     }
 
-    public static CreatureAbilities GetAbilitiesFromJson(string json, JsonSerializerOptions? opt = null)
-    {
-        CreatureAbilities? abilities;
-        try
-        {
-            abilities = JsonSerializer.Deserialize<CreatureAbilities>(json, opt);
-        }
-        catch (Exception)
-        {
-            throw new InvalidAbilitiesJsonException();
-        }
-
-        if (abilities is null)
-        {
-            throw new InvalidAbilitiesJsonException();
-        }
-
-        return abilities;
-    }
-
-    public string? GetAbilitiesAsJson(JsonSerializerOptions? opt = null)
-    {
-        return Abilities is null ? null : JsonSerializer.Serialize(Abilities, opt);
-    }
-
-    public void SetAbilitiesAsJson(string json, JsonSerializerOptions? opt = null)
-    {
-        Abilities = GetAbilitiesFromJson(json, opt);
-    }
-
-    public CreatureAbilities? Abilities { get; set; }
+    public CardBehavior? Behavior { get; set; }
 }

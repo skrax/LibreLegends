@@ -25,7 +25,7 @@ public static class CardDtoMapper
         Cost = creatureResponse.Cost,
         Strength = creatureResponse.Strength,
         Health = creatureResponse.Health,
-        AbilitiesJson = creatureResponse.AbilitiesJson,
+        BehaviorJson = creatureResponse.BehaviorJson,
     };
 
     public static SpellDto AsSpellDto(this SpellResponse spellResponse) => new()
@@ -34,7 +34,7 @@ public static class CardDtoMapper
         Name = spellResponse.Name,
         Description = spellResponse.Description,
         Cost = spellResponse.Cost,
-        AbilitiesJson = spellResponse.AbilitiesJson,
+        BehaviorJson = spellResponse.BehaviorJson,
     };
 
     public static CreateCreatureRequest AsCreateCreatureRequest(this CreateOrUpdateCreatureDto dto) => new()
@@ -44,7 +44,7 @@ public static class CardDtoMapper
         Cost = dto.Cost,
         Health = dto.Health,
         Strength = dto.Strength,
-        AbilitiesJson = dto.AbilitiesJson
+        BehaviorJson = dto.BehaviorJson
     };
 
     public static UpdateCreatureRequest AsUpdateCreatureRequest(this CreateOrUpdateCreatureDto dto, Guid id) => new()
@@ -55,7 +55,7 @@ public static class CardDtoMapper
         Cost = dto.Cost,
         Health = dto.Health,
         Strength = dto.Strength,
-        AbilitiesJson = dto.AbilitiesJson
+        BehaviorJson = dto.BehaviorJson
     };
 
     public static CreateSpellRequest AsCreateSpellRequest(this CreateOrUpdateSpellDto dto) => new()
@@ -63,7 +63,7 @@ public static class CardDtoMapper
         Name = dto.Name,
         Description = dto.Description,
         Cost = dto.Cost,
-        AbilitiesJson = dto.AbilitiesJson
+        BehaviorJson = dto.BehaviorJson
     };
 
     public static UpdateSpellRequest AsUpdateSpellRequest(this CreateOrUpdateSpellDto dto, Guid id) => new()
@@ -72,6 +72,6 @@ public static class CardDtoMapper
         Name = dto.Name,
         Description = dto.Description,
         Cost = dto.Cost,
-        AbilitiesJson = dto.AbilitiesJson
+        BehaviorJson = dto.BehaviorJson
     };
 }

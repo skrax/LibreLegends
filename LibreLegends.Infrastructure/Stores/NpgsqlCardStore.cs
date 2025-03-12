@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.Mapper;
 using LibreLegends.Infrastructure.Schema;
 using Npgsql;

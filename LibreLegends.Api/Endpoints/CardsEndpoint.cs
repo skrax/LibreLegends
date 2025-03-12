@@ -2,6 +2,7 @@
 using LibreLegends.Api.Models.Request;
 using LibreLegends.CardManagement.Application.Services;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibreLegends.Api.Endpoints;

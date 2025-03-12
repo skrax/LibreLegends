@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using LibreLegends.Domain.Exceptions;
 
-namespace LibreLegends.Domain.Models;
+namespace LibreLegends.Domain.Models.Cards;
 
 [JsonDerivedType(typeof(Creature))]
 [JsonDerivedType(typeof(Spell))]

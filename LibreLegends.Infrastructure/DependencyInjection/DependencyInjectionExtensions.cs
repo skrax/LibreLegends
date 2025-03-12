@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.SqlTypeHandler;
 using LibreLegends.Infrastructure.Stores;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,8 +19,7 @@ public static class DependencyInjectionExtensions
             .AddScoped<ISpellStore, NpgsqlSpellStore>()
             .AddScoped<ICardStore, NpgsqlCardStore>();
 
-        SqlMapper.AddTypeHandler(new JsonBTypeHandler<CreatureAbilities>());
-        SqlMapper.AddTypeHandler(new JsonBTypeHandler<SpellAbilities>());
+        SqlMapper.AddTypeHandler(new JsonBTypeHandler<CardBehavior>());
 
         return builder;
     }

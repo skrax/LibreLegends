@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Api", "LibreLegends.Api\LibreLegends.Api.csproj", "{9DC46C48-AC77-4F84-ABF7-70DB80495FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.WebClient", "LibreLegends.WebClient\LibreLegends.WebClient.csproj", "{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Web", "LibreLegends.Web\LibreLegends.Web.csproj", "{A779DF7F-5D8A-44E9-853A-A312ED7B1DEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Domain", "LibreLegends.Domain\LibreLegends.Domain.csproj", "{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}"
 EndProject

@@ -4,6 +4,7 @@ using LibreLegends.CardManagement.Application.Models.Request;
 using LibreLegends.CardManagement.Application.Models.Response;
 using LibreLegends.Domain.Exceptions;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.Stores;
 
 namespace LibreLegends.CardManagement.Application.Services;

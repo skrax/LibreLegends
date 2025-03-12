@@ -1,6 +1,7 @@
 ﻿using LibreLegends.CardManagement.Application.Models.Request;
 using LibreLegends.CardManagement.Application.Models.Response;
 using LibreLegends.Domain.Models;
+using LibreLegends.Domain.Models.Cards;
 
 namespace LibreLegends.CardManagement.Application.Services;
 

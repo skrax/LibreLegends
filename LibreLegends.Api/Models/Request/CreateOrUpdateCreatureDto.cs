@@ -21,5 +21,5 @@ public class CreateOrUpdateCreatureDto
     [Range(0, int.MaxValue)]
     public required int Health { get; set; }
     
-    public string? AbilitiesJson { get; set; }
+    public string? BehaviorJson { get; set; }
 }
