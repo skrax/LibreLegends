@@ -1,4 +1,6 @@
-﻿function Table() {
+﻿import LandingPage from "./LandingPage";
+
+function Table() {
   return (
     <table>
       <caption>Front-end web developer course 2021</caption>
@@ -45,9 +47,6 @@
 
 export default function App() {
   return (
-    <div>
-      <h1>Hello from React!</h1>
-      <Table />
-    </div>
+    <LandingPage/>
   );
 }
