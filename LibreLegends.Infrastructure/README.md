@@ -9,19 +9,7 @@ The goal of the Infrastructure project is to provide a data-access abstraction f
 
 Entity Framework is omitted to ensure maximum control over PostgreSQL.
 
-## Install Public API
-
-Add a reference to this in a host project and install using:
-```(csharp)
-// Add Infrastructure via IHostApplicationBuilder
-builder.AddLibreLegendsInfrastructure();
-```
-
 ## Database Migration
 
 The project provides an application for migrating the database. Migration is not possible via a public interface.  
 All migration scripts are located under `Migrations` and executed using `MigrateDatabase.cs`.
-
-
-
-

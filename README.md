@@ -22,8 +22,9 @@ growing collection.
 
 ### Prerequisites
 
-- .NET 8.0 or higher
+- .NET 8.0
 - Podman / Docker or another suitable container runtime
+- NPM  / NodeJs
 
 ### Running the project
 
