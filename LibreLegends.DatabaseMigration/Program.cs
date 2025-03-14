@@ -8,7 +8,7 @@ var builder = Host.CreateApplicationBuilder();
 
 builder.AddServiceDefaults();
 
-builder.AddDatabase();
+builder.AddInfrastructureDatabaseNpgsql();
 
 builder.Services.AddHostedService<MigrateDatabase>();
 

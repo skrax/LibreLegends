@@ -9,14 +9,14 @@ namespace LibreLegends.Infrastructure.DependencyInjection;
 
 public static class DependencyInjectionExtensions
 {
-    internal static IHostApplicationBuilder AddDatabase(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructureDatabaseNpgsql(this IHostApplicationBuilder builder)
     {
         builder.AddNpgsqlDataSource("Database");
 
         return builder;
     }
 
-    internal static IHostApplicationBuilder AddServices(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructureServicesNpgsql(this IHostApplicationBuilder builder)
     {
         builder.Services
             .AddScoped<ICreatureStore, NpgsqlCreatureStore>()
@@ -26,7 +26,7 @@ public static class DependencyInjectionExtensions
         return builder;
     }
 
-    internal static IHostApplicationBuilder AddSqlMapperTypeHandlers(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructureDapperSqlMapperTypeHandlersNpgsql(this IHostApplicationBuilder builder)
     {
         SqlMapper.AddTypeHandler(new JsonBTypeHandler<CardBehavior>());
 
@@ -36,8 +36,8 @@ public static class DependencyInjectionExtensions
     public static IHostApplicationBuilder AddInfrastructureNpgsql(this IHostApplicationBuilder builder)
     {
         return builder
-            .AddDatabase()
-            .AddServices()
-            .AddSqlMapperTypeHandlers();
+            .AddInfrastructureDatabaseNpgsql()
+            .AddInfrastructureServicesNpgsql()
+            .AddInfrastructureDapperSqlMapperTypeHandlersNpgsql();
     }
 }

@@ -19,7 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LibreLegends.Api\LibreLegends.Api.csproj" />
-      <ProjectReference Include="..\LibreLegends.Infrastructure\LibreLegends.Infrastructure.csproj" />
+      <ProjectReference Include="..\LibreLegends.DatabaseMigration\LibreLegends.DatabaseMigration.csproj" />
       <ProjectReference Include="..\LibreLegends.Web\LibreLegends.Web.csproj" />
     </ItemGroup>
 

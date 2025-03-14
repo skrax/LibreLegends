@@ -4,7 +4,6 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <OutputType>Exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,11 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LibreLegends.Domain\LibreLegends.Domain.csproj" />
-      <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <None Include="Migrations\*.sql" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ var postgres = builder
 
 var database = postgres.AddDatabase("Database", databaseName: "libre_legends");
 
-var databaseMigration = builder.AddProject<LibreLegends_Infrastructure>("DatabaseMigration")
+var databaseMigration = builder.AddProject<LibreLegends_DatabaseMigration>("DatabaseMigration")
     .WithReference(database);
 
 databaseMigration.WaitFor(database);
