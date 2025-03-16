@@ -10,5 +10,11 @@ public class CreatureResponse : CardResponse
 
     public required int Health { get; set; }
     
+    public required bool Defender { get; set; }
+    
+    public required bool Haste { get; set; }
+    
+    public required bool Exposed { get; set; }
+    
     public string? BehaviorJson { get; set; }
 }

@@ -3,6 +3,8 @@
 public class UpdateSpellRequest
 {
     public required Guid Id { get; set; }
+    
+    public string? FlavorText { get; set; }
 
     public required string Name { get; set; }
 

@@ -11,6 +11,8 @@ public abstract class Card
 
     public Guid Id { get; set; }
 
+    public string? FlavorText;
+
     public required string Name
     {
         get => _name;

@@ -20,56 +20,62 @@ public static class CardMapper
     {
         Id = card.Id,
         Name = card.Name,
+        FlavorText = card.FlavorText,
         Description = card.Description,
         Cost = card.Cost,
         Strength = card.Strength,
         Health = card.Health,
-        BehaviorJson = card.Behavior?.ToJson()
+        Defender = card.Defender,
+        Haste = card.Haste,
+        Exposed = card.Exposed,
+        BehaviorJson = card.Behavior?.ToJson(),
     };
 
     public static SpellResponse AsSpellResponse(this Spell spell) => new()
     {
         Id = spell.Id,
         Name = spell.Name,
+        FlavorText = spell.FlavorText,
         Description = spell.Description,
         Cost = spell.Cost,
         BehaviorJson = spell.Behavior.ToJson()
     };
 
-    public static Creature AsCreature(this CreateCreatureRequest request)
+    public static Creature AsCreature(this CreateCreatureRequest request) => new()
     {
-        var creature = new Creature
-        {
-            Name = request.Name,
-            Description = request.Description,
-            Cost = request.Cost,
-            Strength = request.Strength,
-            Health = request.Health,
-            Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
-        };
+        Name = request.Name,
+        FlavorText = request.FlavorText,
+        Description = request.Description,
+        Cost = request.Cost,
+        Strength = request.Strength,
+        Health = request.Health,
+        Defender = request.Defender,
+        Haste = request.Haste,
+        Exposed = request.Exposed,
+        Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
+    };
 
-        return creature;
-    }
 
-    public static Creature AsCreature(this UpdateCreatureRequest request)
+    public static Creature AsCreature(this UpdateCreatureRequest request) => new()
     {
-        var creature = new Creature
-        {
-            Id = request.Id,
-            Name = request.Name,
-            Description = request.Description,
-            Cost = request.Cost,
-            Strength = request.Strength,
-            Health = request.Health,
-            Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
-        };
+        Id = request.Id,
+        Name = request.Name,
+        FlavorText = request.FlavorText,
+        Description = request.Description,
+        Cost = request.Cost,
+        Strength = request.Strength,
+        Health = request.Health,
+        Defender = request.Defender,
+        Haste = request.Haste,
+        Exposed = request.Exposed,
+        Behavior = request.BehaviorJson is null ? null : CardBehavior.FromJson(request.BehaviorJson)
+    };
 
-        return creature;
-    }
 
     public static Spell AsSpell(this CreateSpellRequest request) => new()
     {
         Name = request.Name,
+        FlavorText = request.FlavorText,
         Description = request.Description,
         Cost = request.Cost,
         Behavior = CardBehavior.FromJson(request.BehaviorJson)
@@ -78,6 +84,7 @@ public static class CardMapper
     public static Spell AsSpell(this UpdateSpellRequest request) => new()
     {
         Name = request.Name,
+        FlavorText = request.FlavorText,
         Description = request.Description,
         Cost = request.Cost,
         Behavior = CardBehavior.FromJson(request.BehaviorJson)

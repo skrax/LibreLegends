@@ -18,6 +18,10 @@
       <_ContentIncludedByDefault Remove="libre-legends-web\docs\openapi.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="libre-legends-web\src\components\" />
+    </ItemGroup>
+
     <Target Name="NpmBuild" BeforeTargets="Build">
         <Exec Command="npm install" WorkingDirectory="libre-legends-web"/>
         <Exec Command="npm run bundle" WorkingDirectory="libre-legends-web"/>

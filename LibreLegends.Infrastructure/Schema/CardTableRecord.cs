@@ -9,6 +9,8 @@ internal class CardTableRecord
     
     public required string name { get; set; }
     
+    public string? flavor_text { get; set; }
+    
     public string? description { get; set; }
     
     public int card_type_id { get; set; }
@@ -18,6 +20,12 @@ internal class CardTableRecord
     public int? health { get; set; }
     
     public int? strength { get; set; }
+    
+    public bool? defender { get; set; }
+    
+    public bool? haste { get; set; }
+    
+    public bool? exposed { get; set; }
     
     public string? behavior { get; set; }
 }

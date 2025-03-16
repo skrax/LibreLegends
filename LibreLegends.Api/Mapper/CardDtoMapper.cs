@@ -21,10 +21,14 @@ public static class CardDtoMapper
     {
         Id = creatureResponse.Id,
         Name = creatureResponse.Name,
+        FlavorText = creatureResponse.FlavorText,
         Description = creatureResponse.Description,
         Cost = creatureResponse.Cost,
         Strength = creatureResponse.Strength,
         Health = creatureResponse.Health,
+        Defender = creatureResponse.Defender,
+        Haste = creatureResponse.Haste,
+        Exposed = creatureResponse.Exposed,
         BehaviorJson = creatureResponse.BehaviorJson,
     };
 
@@ -32,6 +36,7 @@ public static class CardDtoMapper
     {
         Id = spellResponse.Id,
         Name = spellResponse.Name,
+        FlavorText = spellResponse.FlavorText,  
         Description = spellResponse.Description,
         Cost = spellResponse.Cost,
         BehaviorJson = spellResponse.BehaviorJson,
@@ -40,6 +45,7 @@ public static class CardDtoMapper
     public static CreateCreatureRequest AsCreateCreatureRequest(this CreateOrUpdateCreatureDto dto) => new()
     {
         Name = dto.Name,
+        FlavorText = dto.FlavorText,
         Description = dto.Description,
         Cost = dto.Cost,
         Health = dto.Health,
@@ -51,6 +57,7 @@ public static class CardDtoMapper
     {
         Id = id,
         Name = dto.Name,
+        FlavorText = dto.FlavorText,
         Description = dto.Description,
         Cost = dto.Cost,
         Health = dto.Health,
@@ -61,6 +68,7 @@ public static class CardDtoMapper
     public static CreateSpellRequest AsCreateSpellRequest(this CreateOrUpdateSpellDto dto) => new()
     {
         Name = dto.Name,
+        FlavorText = dto.FlavorText,
         Description = dto.Description,
         Cost = dto.Cost,
         BehaviorJson = dto.BehaviorJson
@@ -70,6 +78,7 @@ public static class CardDtoMapper
     {
         Id = id,
         Name = dto.Name,
+        FlavorText = dto.FlavorText,
         Description = dto.Description,
         Cost = dto.Cost,
         BehaviorJson = dto.BehaviorJson

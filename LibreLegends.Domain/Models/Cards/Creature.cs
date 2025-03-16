@@ -56,6 +56,12 @@ public class Creature : Card
             _health = value;
         }
     }
+    
+    public required bool Defender { get; set; }
+    
+    public required bool Haste { get; set; }
+    
+    public required bool Exposed { get; set; }
 
     public CardBehavior? Behavior { get; set; }
 }

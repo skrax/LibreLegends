@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using LibreLegends.Domain.Models;
 using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.Schema;
 
@@ -12,10 +11,14 @@ internal static class CardMapper
         {
             Id = x.id,
             Name = x.name,
+            FlavorText = x.flavor_text,
             Description = x.description,
             Cost = x.cost!.Value,
             Strength = x.strength!.Value,
             Health = x.health!.Value,
+            Defender = x.defender!.Value,
+            Haste = x.haste!.Value,
+            Exposed = x.exposed!.Value,
             Behavior = x.behavior is null
                 ? null
                 : CardBehavior.FromJson(x.behavior!, serializerOptions)
@@ -25,6 +28,7 @@ internal static class CardMapper
     {
         Id = x.id,
         Name = x.name,
+        FlavorText = x.flavor_text,
         Description = x.description!,
         Cost = x.cost!.Value,
         Behavior = CardBehavior.FromJson(x.behavior!, serializerOptions)

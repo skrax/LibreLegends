@@ -9,6 +9,12 @@ public class CreatureDto : CardDto
     public required int Strength { get; set; }
 
     public required int Health { get; set; }
+    
+    public required bool Defender { get; set; }
+    
+    public required bool Haste { get; set; }
+    
+    public required bool Exposed { get; set; }
 
     public string? BehaviorJson { get; set; }
 }
