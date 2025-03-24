@@ -1,20 +1,27 @@
-﻿import { Creature } from "../models/card";
-import { useEffect, useState } from "react";
+﻿import { Creature, Spell } from "../models/card";
+import { useContext, useEffect, useState } from "react";
+import { CardsApi } from "../services/cardsApi";
+import { ApiContext } from "../context";
 
-const useCreatureForm = () => {
-  const [creature, setCreature] = useState<Creature>(new Creature());
-  const [jsonPreview, setJsonPreview] = useState<string>("");
+const useCardState = function <T>(seedValue: T) {
+  return function () {
+    const [card, setCard] = useState<T>(seedValue);
+    const [jsonPreview, setJsonPreview] = useState<string>("");
 
-  useEffect(() => {
-    setJsonPreview(JSON.stringify(creature, null, 2));
-  }, [creature]);
+    useEffect(() => {
+      setJsonPreview(JSON.stringify(card, null, 2));
+    }, [card]);
 
-  const updateCreature = (field: keyof Creature, value: any) => {
-    setCreature((prev) => ({ ...prev, [field]: value }));
+    const updateCard = (field: keyof T, value: any) => {
+      setCard((prev) => ({ ...prev, [field]: value }));
+    };
+
+    return { card, jsonPreview, updateCard };
   };
-
-  return { creature, jsonPreview, updateCreature };
 };
+
+const useCreatureState = useCardState<Partial<Creature>>({});
+const useSpellState = useCardState<Partial<Spell>>({});
 
 const TextInput = ({
   label,
@@ -24,8 +31,8 @@ const TextInput = ({
 }: {
   label: string;
   placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange: (value?: string) => void;
 }) => (
   <>
     <label className="fieldset-label">{label}</label>
@@ -34,7 +41,7 @@ const TextInput = ({
       className="input w-full"
       placeholder={placeholder}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value || undefined)}
     />
   </>
 );
@@ -47,8 +54,8 @@ const TextArea = ({
 }: {
   label: string;
   placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange: (value?: string) => void;
 }) => (
   <>
     <label className="fieldset-label">{label}</label>
@@ -56,7 +63,7 @@ const TextArea = ({
       className="textarea w-full"
       placeholder={placeholder}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value || undefined)}
     />
   </>
 );
@@ -69,17 +76,20 @@ const NumberInput = ({
 }: {
   label: string;
   placeholder: string;
-  value: number;
-  onChange: (value: number) => void;
+  value?: number;
+  onChange: (value?: number) => void;
 }) => (
-  <label className="join-item input">
+  <label className="join-item input w-full">
     <span className="label">{label}</span>
     <input
       type="number"
       className="input"
+      min={0}
       placeholder={placeholder}
-      value={value || ""}
-      onChange={(e) => onChange(parseInt(e.target.value) || 0)}
+      value={value}
+      onChange={(e) =>
+        onChange(e.target.value === "" ? undefined : e.target.valueAsNumber)
+      }
     />
   </label>
 );
@@ -90,46 +100,56 @@ const CheckboxInput = ({
   onChange,
 }: {
   label: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
+  checked?: boolean;
+  onChange: (checked?: boolean) => void;
 }) => (
   <label className="fieldset-label">
     <input
       type="checkbox"
       className="checkbox"
       checked={checked}
-      onChange={(e) => onChange(e.target.checked)}
+      onChange={(e) => onChange(e.target.checked || undefined)}
     />
     {label}
   </label>
 );
 
-export default function CardCreator() {
-  const { creature, jsonPreview, updateCreature } = useCreatureForm();
+const CreatureForm = () => {
+  const {
+    card: creature,
+    jsonPreview,
+    updateCard: updateCreature,
+  } = useCreatureState();
+  
+  const api = useContext(ApiContext);
+  
+  const onSubmit = () => {
+    api.postCreature(creature as Creature).then();
+  };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 bg-white rounded-lg shadow">
+    <form onSubmit={onSubmit}>
       <fieldset className="fieldset max-w-lg bg-base-200 border border-base-300 p-4 rounded-box">
         <legend className="fieldset-legend">Creature</legend>
 
         <TextInput
           label="Name"
           placeholder="Armored Swordsman"
-          value={creature.Name || ""}
+          value={creature.Name}
           onChange={(value) => updateCreature("Name", value)}
         />
 
         <TextArea
           label="Flavor Text"
           placeholder="Their shields are as steadfast as their loyalty."
-          value={creature.FlavorText || ""}
+          value={creature.FlavorText}
           onChange={(value) => updateCreature("FlavorText", value)}
         />
 
         <TextArea
           label="Description"
           placeholder="Defender"
-          value={creature.Description || ""}
+          value={creature.Description}
           onChange={(value) => updateCreature("Description", value)}
         />
 
@@ -138,19 +158,19 @@ export default function CardCreator() {
           <NumberInput
             label="Cost"
             placeholder="3"
-            value={creature.Cost || 0}
+            value={creature.Cost}
             onChange={(value) => updateCreature("Cost", value)}
           />
           <NumberInput
             label="Strength"
             placeholder="3"
-            value={creature.Strength || 0}
+            value={creature.Strength}
             onChange={(value) => updateCreature("Strength", value)}
           />
           <NumberInput
             label="Health"
             placeholder="3"
-            value={creature.Health || 0}
+            value={creature.Health}
             onChange={(value) => updateCreature("Health", value)}
           />
         </div>
@@ -160,19 +180,19 @@ export default function CardCreator() {
 
           <CheckboxInput
             label="Defender"
-            checked={creature.Defender || false}
+            checked={creature.Defender}
             onChange={(checked) => updateCreature("Defender", checked)}
           />
 
           <CheckboxInput
             label="Haste"
-            checked={creature.Haste || false}
+            checked={creature.Haste}
             onChange={(checked) => updateCreature("Haste", checked)}
           />
 
           <CheckboxInput
             label="Exposed"
-            checked={creature.Exposed || false}
+            checked={creature.Exposed}
             onChange={(checked) => updateCreature("Exposed", checked)}
           />
         </fieldset>
@@ -182,6 +202,86 @@ export default function CardCreator() {
         <legend className="fieldset-legend">JSON Preview</legend>
         <pre>{jsonPreview}</pre>
       </fieldset>
+
+      <fieldset className="fieldset max-w-lg mt-4">
+        <button className="btn btn-primary">Submit</button>
+      </fieldset>
+    </form>
+  );
+};
+
+const SpellForm = () => {
+  const { card: spell, jsonPreview, updateCard: updateSpell } = useSpellState();
+
+  const onSubmit = () => {};
+
+  return (
+    <form onSubmit={onSubmit}>
+      <fieldset className="fieldset max-w-lg bg-base-200 border border-base-300 p-4 rounded-box">
+        <legend className="fieldset-legend">Spell</legend>
+
+        <TextInput
+          label="Name"
+          placeholder="Healing Light"
+          value={spell.Name}
+          onChange={(value) => updateSpell("Name", value)}
+        />
+
+        <TextArea
+          label="Flavor Text"
+          placeholder="A gentle touch, a swift recovery."
+          value={spell.FlavorText}
+          onChange={(value) => updateSpell("FlavorText", value)}
+        />
+
+        <TextArea
+          label="Description"
+          placeholder="Restore 4 health to a friendly creature or hero."
+          value={spell.Description}
+          onChange={(value) => updateSpell("Description", value)}
+        />
+
+        <label className="fieldset-label">Stats</label>
+        <div className="join">
+          <NumberInput
+            label="Cost"
+            placeholder="2"
+            value={spell.Cost}
+            onChange={(value) => updateSpell("Cost", value)}
+          />
+        </div>
+      </fieldset>
+
+      <fieldset className="fieldset max-w-lg bg-base-200 border border-base-300 p-4 rounded-box">
+        <legend className="fieldset-legend">JSON Preview</legend>
+        <pre>{jsonPreview}</pre>
+      </fieldset>
+
+      <fieldset className="fieldset max-w-lg mt-4">
+        <button className="btn btn-primary">Submit</button>
+      </fieldset>
+    </form>
+  );
+};
+
+export default function CardCreator() {
+  return (
+    <div className="tabs tabs-lift">
+      <input
+        type="radio"
+        name="my_tabs_3"
+        className="tab"
+        aria-label="Creature"
+        defaultChecked
+      />
+      <div className="tab-content bg-base-100 border-base-300 p-6">
+        <CreatureForm />
+      </div>
+
+      <input type="radio" name="my_tabs_3" className="tab" aria-label="Spell" />
+      <div className="tab-content bg-base-100 border-base-300 p-6">
+        <SpellForm />
+      </div>
     </div>
   );
 }
