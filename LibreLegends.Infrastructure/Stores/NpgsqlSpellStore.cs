@@ -12,8 +12,22 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
         await db.OpenAsync(cancellationToken);
 
         const string sql = """
-                           INSERT INTO cards (name, description, card_type_id, cost, behavior)
-                           VALUES (@Name, @Description, 2, @Cost, @Behavior)
+                           INSERT INTO cards (
+                               name,
+                               description,
+                               flavor_text,
+                               card_type_id,
+                               cost,
+                               behavior
+                           )
+                           VALUES (
+                               @Name,
+                               @Description,
+                               @FlavorText,
+                               2,
+                               @Cost,
+                               @Behavior
+                           )
                            RETURNING id
                            """;
 
@@ -21,6 +35,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
         {
             spell.Name,
             spell.Description,
+            spell.FlavorText,
             spell.Cost,
             spell.Behavior
         };
@@ -30,7 +45,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
         await db.CloseAsync();
 
         spell.Id = id;
-        
+
         return id;
     }
 
@@ -42,6 +57,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
                            UPDATE cards SET 
                                name = @Name,
                                description = @Description,
+                               flavor_text = @FlavorText,
                                cost = @Cost,
                                behavior = @Behavior
                            WHERE id = @Id AND card_type_id = 2
@@ -51,6 +67,7 @@ internal class NpgsqlSpellStore(NpgsqlConnection db) : ISpellStore
         {
             spell.Name,
             spell.Description,
+            spell.FlavorText,
             spell.Cost,
             spell.Behavior,
             spell.Id

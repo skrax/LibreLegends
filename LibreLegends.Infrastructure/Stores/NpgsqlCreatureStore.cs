@@ -12,8 +12,32 @@ internal class NpgsqlCreatureStore(NpgsqlConnection db) : ICreatureStore
         await db.OpenAsync(cancellationToken);
 
         const string sql = """
-                           INSERT INTO cards (name, description, card_type_id, cost, strength, health, behavior)
-                           VALUES (@Name, @Description, 1, @Cost, @Strength, @Health, @Behavior)
+                           INSERT INTO cards (
+                               name,
+                               description,
+                               flavor_text,
+                               card_type_id,
+                               cost,
+                               strength,
+                               health,
+                               defender,
+                               haste,
+                               exposed,
+                               behavior
+                           )
+                           VALUES (
+                               @Name, 
+                               @Description,
+                               @FlavorText,
+                               1,
+                               @Cost,
+                               @Strength,
+                               @Health,
+                               @Defender,
+                               @Haste,
+                               @Exposed,
+                               @Behavior
+                           )
                            RETURNING id
                            """;
 
@@ -21,9 +45,13 @@ internal class NpgsqlCreatureStore(NpgsqlConnection db) : ICreatureStore
         {
             creature.Name,
             creature.Description,
+            creature.FlavorText,
             creature.Cost,
             creature.Strength,
             creature.Health,
+            creature.Defender,
+            creature.Haste,
+            creature.Exposed,
             creature.Behavior
         };
 
@@ -43,9 +71,13 @@ internal class NpgsqlCreatureStore(NpgsqlConnection db) : ICreatureStore
                            UPDATE cards SET 
                                name = @Name,
                                description = @Description,
+                               flavor_text = @FlavorText,
                                cost = @Cost,
                                strength = @Strength,
                                health = @Health,
+                               defender = @Defender,
+                               haste = @Haste,
+                               exposed = @Exposed,
                                behavior = @Behavior
                            WHERE id = @Id AND card_type_id = 1
                            """;
@@ -54,9 +86,13 @@ internal class NpgsqlCreatureStore(NpgsqlConnection db) : ICreatureStore
         {
             creature.Name,
             creature.Description,
+            creature.FlavorText,
             creature.Cost,
             creature.Strength,
             creature.Health,
+            creature.Defender,
+            creature.Haste,
+            creature.Exposed,
             creature.Behavior,
             creature.Id
         };

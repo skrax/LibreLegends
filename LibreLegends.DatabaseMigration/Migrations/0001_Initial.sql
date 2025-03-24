@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS public.cards
             cost IS NOT NULL AND
             strength IS NOT NULL AND
             health IS NOT NULL AND
-            defender IS NULL AND
-            haste IS NULL AND
-            exposed IS NULL
+            defender IS NOT NULL AND
+            haste IS NOT NULL AND
+            exposed IS NOT NULL
             )
         ),
 
