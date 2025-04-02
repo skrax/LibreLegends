@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace LibreLegends.Api.Models.Response;
+namespace LibreLegends.Api.Models.Response.CardManagement;
 
 [JsonDerivedType(typeof(CreatureDto), "creature")]
 [JsonDerivedType(typeof(SpellDto), "spell")]

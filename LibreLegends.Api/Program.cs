@@ -1,6 +1,7 @@
 using LibreLegends.Api.Endpoints;
 using LibreLegends.CardManagement.Application.DependencyInjection;
 using LibreLegends.Infrastructure.DependencyInjection;
+using LibreLegends.MatchMaking.DependencyInjection;
 using LibreLegends.ServiceDefaults;
 
 try
@@ -11,8 +12,9 @@ try
     builder.Services.AddOpenApi();
     builder.AddServiceDefaults();
 
-    builder.AddInfrastructureNpgsql();
+    builder.AddInfrastructure();
     builder.AddCardManagement();
+    builder.AddMatchMaking();
 
     var app = builder.Build();
 
@@ -30,6 +32,7 @@ try
     app.UseHttpsRedirection();
 
     app.MapCardsEndpoint();
+    app.MapMatchesEndpoint();
 
     app.Run();
 }

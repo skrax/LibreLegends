@@ -33,8 +33,10 @@ public static class DependencyInjectionExtensions
         return builder;
     }
 
-    public static IHostApplicationBuilder AddInfrastructureNpgsql(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddInfrastructure(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddSingleton<IMatchStore, InMemoryMatchStore>();
+        
         return builder
             .AddInfrastructureDatabaseNpgsql()
             .AddInfrastructureServicesNpgsql()

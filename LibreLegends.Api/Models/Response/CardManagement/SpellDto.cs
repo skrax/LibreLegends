@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.Api.Models.Response;
+﻿namespace LibreLegends.Api.Models.Response.CardManagement;
 
 public class SpellDto : CardDto
 {

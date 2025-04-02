@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LibreLegends.Api.Models.Request;
+namespace LibreLegends.Api.Models.Request.CardManagement;
 
 public class CreateOrUpdateSpellDto
 {

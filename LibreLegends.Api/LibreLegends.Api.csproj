@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LibreLegends.CardManagement.Application\LibreLegends.CardManagement.Application.csproj" />
+      <ProjectReference Include="..\LibreLegends.MatchMaking\LibreLegends.MatchMaking.csproj" />
       <ProjectReference Include="..\LibreLegends.ServiceDefaults\LibreLegends.ServiceDefaults.csproj" />
     </ItemGroup>
 

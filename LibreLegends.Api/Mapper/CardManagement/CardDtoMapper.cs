@@ -1,9 +1,9 @@
-﻿using LibreLegends.Api.Models.Request;
-using LibreLegends.Api.Models.Response;
+﻿using LibreLegends.Api.Models.Request.CardManagement;
+using LibreLegends.Api.Models.Response.CardManagement;
 using LibreLegends.CardManagement.Application.Models.Request;
 using LibreLegends.CardManagement.Application.Models.Response;
 
-namespace LibreLegends.Api.Mapper;
+namespace LibreLegends.Api.Mapper.CardManagement;
 
 public static class CardDtoMapper
 {

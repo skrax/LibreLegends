@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.DatabaseMigrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Cli", "LibreLegends.Cli\LibreLegends.Cli.csproj", "{58E8FDDF-0552-442C-89EF-1C1726A64E4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.MatchMaking", "LibreLegends.MatchMaking\LibreLegends.MatchMaking.csproj", "{DD0518A6-49E3-4D09-83FD-0C6570A3D3AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{58E8FDDF-0552-442C-89EF-1C1726A64E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E8FDDF-0552-442C-89EF-1C1726A64E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E8FDDF-0552-442C-89EF-1C1726A64E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD0518A6-49E3-4D09-83FD-0C6570A3D3AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD0518A6-49E3-4D09-83FD-0C6570A3D3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD0518A6-49E3-4D09-83FD-0C6570A3D3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD0518A6-49E3-4D09-83FD-0C6570A3D3AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 
-namespace LibreLegends.Infrastructure;
+namespace LibreLegends.DatabaseMigration;
 
 internal class MigrateDatabase(NpgsqlConnection connection, IHostApplicationLifetime hostLifetime, ILogger<MigrateDatabase> logger)
     : BackgroundService

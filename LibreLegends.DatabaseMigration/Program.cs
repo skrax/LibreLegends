@@ -1,4 +1,5 @@
-﻿using LibreLegends.Infrastructure;
+﻿using LibreLegends.DatabaseMigration;
+using LibreLegends.Infrastructure;
 using LibreLegends.Infrastructure.DependencyInjection;
 using LibreLegends.ServiceDefaults;
 using Microsoft.Extensions.DependencyInjection;
