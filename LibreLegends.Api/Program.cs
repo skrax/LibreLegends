@@ -1,5 +1,5 @@
 using LibreLegends.Api.Endpoints;
-using LibreLegends.CardManagement.Application.DependencyInjection;
+using LibreLegends.CardManagement.DependencyInjection;
 using LibreLegends.Infrastructure.DependencyInjection;
 using LibreLegends.MatchMaking.DependencyInjection;
 using LibreLegends.ServiceDefaults;

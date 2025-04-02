@@ -2,7 +2,7 @@
 using LibreLegends.Api.Mapper.CardManagement;
 using LibreLegends.Api.Models.Request;
 using LibreLegends.Api.Models.Request.CardManagement;
-using LibreLegends.CardManagement.Application.Services;
+using LibreLegends.CardManagement.Services;
 using LibreLegends.Domain.Models;
 using LibreLegends.Domain.Models.Cards;
 using Microsoft.AspNetCore.Mvc;

@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Web", "LibreLe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.Domain", "LibreLegends.Domain\LibreLegends.Domain.csproj", "{56EA0EBA-A80D-42EB-8635-2EA9E01A1DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.CardManagement.Application", "LibreLegends.CardManagement.Application\LibreLegends.CardManagement.Application.csproj", "{D2D62905-8EE6-4BB4-A73C-FBDD4BF70DC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.CardManagement", "LibreLegends.CardManagement\LibreLegends.CardManagement.csproj", "{D2D62905-8EE6-4BB4-A73C-FBDD4BF70DC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibreLegends.DatabaseMigration", "LibreLegends.DatabaseMigration\LibreLegends.DatabaseMigration.csproj", "{2BD2A878-1114-4D47-849A-D9D20570C30F}"
 EndProject

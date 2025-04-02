@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.CardManagement.Application.Exceptions;
+﻿namespace LibreLegends.CardManagement.Exceptions;
 
 public class CardManagementValidationException : Exception
 {

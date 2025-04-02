@@ -1,13 +1,13 @@
-﻿using LibreLegends.CardManagement.Application.Exceptions;
-using LibreLegends.CardManagement.Application.Mapper;
-using LibreLegends.CardManagement.Application.Models.Request;
-using LibreLegends.CardManagement.Application.Models.Response;
+﻿using LibreLegends.CardManagement.Mapper;
+using LibreLegends.CardManagement.Exceptions;
+using LibreLegends.CardManagement.Models.Request;
+using LibreLegends.CardManagement.Models.Response;
 using LibreLegends.Domain.Exceptions;
 using LibreLegends.Domain.Models;
 using LibreLegends.Domain.Models.Cards;
 using LibreLegends.Infrastructure.Stores;
 
-namespace LibreLegends.CardManagement.Application.Services;
+namespace LibreLegends.CardManagement.Services;
 
 public class CardManagementService(ICardStore store) : ICardManagementService
 {

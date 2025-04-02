@@ -1,8 +1,8 @@
-﻿using LibreLegends.CardManagement.Application.Services;
+﻿using LibreLegends.CardManagement.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace LibreLegends.CardManagement.Application.DependencyInjection;
+namespace LibreLegends.CardManagement.DependencyInjection;
 
 public static class DependencyInjectionExtensions
 {

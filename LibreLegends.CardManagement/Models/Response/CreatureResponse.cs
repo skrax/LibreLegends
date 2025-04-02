@@ -1,4 +1,4 @@
-﻿namespace LibreLegends.CardManagement.Application.Models.Response;
+﻿namespace LibreLegends.CardManagement.Models.Response;
 
 public class CreatureResponse : CardResponse
 {

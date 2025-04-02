@@ -1,8 +1,8 @@
-﻿using LibreLegends.CardManagement.Application.Models.Request;
-using LibreLegends.CardManagement.Application.Models.Response;
+﻿using LibreLegends.CardManagement.Models.Request;
+using LibreLegends.CardManagement.Models.Response;
 using LibreLegends.Domain.Models.Cards;
 
-namespace LibreLegends.CardManagement.Application.Mapper;
+namespace LibreLegends.CardManagement.Mapper;
 
 public static class CardMapper
 {

@@ -1,7 +1,7 @@
 ﻿using LibreLegends.Api.Models.Request.CardManagement;
 using LibreLegends.Api.Models.Response.CardManagement;
-using LibreLegends.CardManagement.Application.Models.Request;
-using LibreLegends.CardManagement.Application.Models.Response;
+using LibreLegends.CardManagement.Models.Request;
+using LibreLegends.CardManagement.Models.Response;
 
 namespace LibreLegends.Api.Mapper.CardManagement;
 
