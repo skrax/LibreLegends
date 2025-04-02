@@ -3,7 +3,7 @@ using LibreLegends.Domain.Exceptions;
 
 namespace LibreLegends.Domain.Models.Cards;
 
-public class CardBehavior
+public abstract class CardBehavior
 {
     public static CardBehavior FromJson(string json, JsonSerializerOptions? opt = null)
     {
